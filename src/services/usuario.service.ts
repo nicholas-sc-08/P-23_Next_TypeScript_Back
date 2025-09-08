@@ -5,7 +5,7 @@ export async function buscar_usuarios(): Promise<IUsuario[] | null> {
 
     try {
 
-        const usuarios = await prisma.usuarios.findMany();
+        const usuarios = await prisma.usuario.findMany();
         return usuarios;
 
     } catch (erro: any) {
@@ -19,7 +19,7 @@ export async function buscar_usuario_id(id: number): Promise<IUsuario | null> {
 
     try {
 
-        const usuario = await prisma.usuarios.findUnique({ where: id });
+        const usuario = await prisma.usuario.findUnique({ where: id });
         return usuario;
 
     } catch (erro: any) {
@@ -33,7 +33,7 @@ export async function cadastrar_usuario(data: ICreateUsuario): Promise<IUsuario 
 
     try {
 
-        const usuario = await prisma.usuarios.create(data);
+        const usuario = await prisma.usuario.create(data);
         return usuario;
         
     } catch (erro: any) {
@@ -47,7 +47,7 @@ export async function atualizar_usuario(id: string, data: IUpdateUsuario): Promi
 
     try {
 
-        const usuario = await prisma.usuarios.update({where: id, data: data});
+        const usuario = await prisma.usuario.update({where: id, data: data});
         return usuario;
         
     } catch (erro: any) {
@@ -61,7 +61,7 @@ export async function deletar_usuario(id: number) : Promise<void> {
 
     try {
 
-        const usuario = await prisma.usuarios.delete({where: id});
+        const usuario = await prisma.usuario.delete({where: id});
 
     } catch (erro: any) {
       
