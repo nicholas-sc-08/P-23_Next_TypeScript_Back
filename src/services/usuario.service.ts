@@ -1,5 +1,5 @@
 import prisma from "../prisma/client";
-import { IUsuario } from "../types/IUsuario.types";
+import { ICreateUsuario, IUsuario } from "../types/IUsuario.types";
 
 export async function buscar_usuarios(): Promise<IUsuario[] | null> {
 
@@ -26,5 +26,19 @@ export async function buscar_usuario_id(id: number): Promise<IUsuario | null> {
 
         console.error(erro);
         throw new Error(`Erro ao buscar usuario pelo ID`);
+    };
+};
+
+export async function cadastrar_usuario(data: ICreateUsuario): Promise<IUsuario | null>{
+
+    try {
+
+        const usuario = await prisma.usuarios.create(data);
+        return usuario;
+        
+    } catch (erro: any) {
+        
+        console.error(erro);
+        throw new Error(`Erro ao cadastrar o Usuario`);
     };
 };
