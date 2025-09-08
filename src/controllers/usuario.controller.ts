@@ -46,3 +46,26 @@ export async function get_usuario_id(req: Request, res: Response) {
         res.status(500).json({ message: erro.message });
     };
 };
+
+export async function post_usuario(req: Request, res: Response) {
+
+    try {
+
+        const data = req.body;
+        const usuario_validado = usuario_schema.parse(data);
+
+        if(usuario_validado) {
+
+            const resposta = await userService.cadastrar_usuario(usuario_validado);
+            res.status(201).json(resposta);
+        
+        } else {
+
+            res.status(400).json({message: `Usuário inválido!`});
+        };
+        
+    } catch (erro: any) {
+      
+        res.status(500).json({message: erro.message});
+    };
+};
