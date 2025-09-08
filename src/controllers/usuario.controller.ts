@@ -92,3 +92,18 @@ export async function put_usuario(req: Request, res: Response) {
         res.status(500).json({message: erro.message});
     };
 };
+
+export async function delete_usuario(req: Request, res: Response){
+
+    try {
+
+        const { id } = req.params;
+        const deletar_usuario = await userService.deletar_usuario(Number(id));
+        res.status(200).json({message: `Usuario excluido com sucesso!`});
+        
+
+    } catch (erro: any) {
+      
+        res.status(500).json({message: erro.message});
+    };
+};
