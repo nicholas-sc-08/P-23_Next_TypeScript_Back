@@ -19,7 +19,7 @@ export async function buscar_usuario_id(id: number): Promise<IUsuario | null> {
 
     try {
 
-        const usuario = await prisma.usuario.findUnique({ where: id });
+        const usuario = await prisma.usuario.findUnique({ where: { id: id } });
         return usuario;
 
     } catch (erro: any) {
@@ -29,42 +29,42 @@ export async function buscar_usuario_id(id: number): Promise<IUsuario | null> {
     };
 };
 
-export async function cadastrar_usuario(data: ICreateUsuario): Promise<IUsuario | null>{
+export async function cadastrar_usuario(data: ICreateUsuario): Promise<IUsuario | null> {
 
     try {
 
-        const usuario = await prisma.usuario.create(data);
+        const usuario = await prisma.usuario.create({ data: data });
         return usuario;
-        
+
     } catch (erro: any) {
-        
+
         console.error(erro);
         throw new Error(`Erro ao cadastrar o Usuario`);
     };
 };
 
-export async function atualizar_usuario(id: string, data: IUpdateUsuario): Promise<IUsuario | null>{
+export async function atualizar_usuario(id: number, data: IUpdateUsuario): Promise<IUsuario | null> {
 
     try {
 
-        const usuario = await prisma.usuario.update({where: id, data: data});
+        const usuario = await prisma.usuario.update({ where: { id: id }, data: data });
         return usuario;
-        
+
     } catch (erro: any) {
-      
+
         console.error(erro);
         throw new Error(`Erro ao atualizar o Usuário!`);
     };
 };
 
-export async function deletar_usuario(id: number) : Promise<void> {
+export async function deletar_usuario(id: number): Promise<void> {
 
     try {
 
-        const usuario = await prisma.usuario.delete({where: id});
+        const usuario = await prisma.usuario.delete({ where: { id: id } });
 
     } catch (erro: any) {
-      
+
         console.error(erro);
         throw new Error(`Erro ao deletar o Usuário!`);
     };
