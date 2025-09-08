@@ -79,7 +79,7 @@ export async function put_usuario(req: Request, res: Response) {
 
         if(usuario_validado){
 
-            const usuario_atualizado = await userService.atualizar_usuario(id, usuario_validado);
+            const usuario_atualizado = await userService.atualizar_usuario(Number(id), usuario_validado);
             res.status(200).json(usuario_atualizado);
         } else {
 
