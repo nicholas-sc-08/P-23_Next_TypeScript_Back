@@ -69,3 +69,26 @@ export async function post_usuario(req: Request, res: Response) {
         res.status(500).json({message: erro.message});
     };
 };
+
+export async function put_usuario(req: Request, res: Response) {
+  
+    try {
+
+        const { id } = req.params;
+        const data = req.body;
+        const usuario_validado = usuario_update_schema.parse(data);
+
+        if(usuario_validado){
+
+            const usuario_atualizado = await userService.atualizar_usuario(id, usuario_validado);
+            res.status(200).json(usuario_atualizado);
+        } else {
+
+            res.status(400).json({message: `Usuário não é válido para atualizar!`});
+        };
+        
+    } catch (erro: any) {
+      
+        res.status(500).json({message: erro.message});
+    };
+};
