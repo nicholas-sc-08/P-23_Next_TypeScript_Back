@@ -1,5 +1,5 @@
 import prisma from "../prisma/client";
-import { ICreateUsuario, IUsuario } from "../types/IUsuario.types";
+import { ICreateUsuario, IUpdateUsuario, IUsuario } from "../types/IUsuario.types";
 
 export async function buscar_usuarios(): Promise<IUsuario[] | null> {
 
@@ -40,5 +40,32 @@ export async function cadastrar_usuario(data: ICreateUsuario): Promise<IUsuario 
         
         console.error(erro);
         throw new Error(`Erro ao cadastrar o Usuario`);
+    };
+};
+
+export async function atualizar_usuario(id: string, data: IUpdateUsuario): Promise<IUsuario | null>{
+
+    try {
+
+        const usuario = await prisma.usuarios.update({where: id, data: data});
+        return usuario;
+        
+    } catch (erro: any) {
+      
+        console.error(erro);
+        throw new Error(`Erro ao atualizar o Usuário!`);
+    };
+};
+
+export async function deletar_usuario(id: number) : Promise<void> {
+
+    try {
+
+        const usuario = await prisma.usuarios.delete({where: id});
+
+    } catch (erro: any) {
+      
+        console.error(erro);
+        throw new Error(`Erro ao deletar o Usuário!`);
     };
 };
