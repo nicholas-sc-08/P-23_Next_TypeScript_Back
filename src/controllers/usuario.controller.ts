@@ -1,7 +1,6 @@
 import * as userService from "../services/usuario.service";
 import { usuario_schema } from "../services/usuario.validation";
 import { usuario_update_schema } from "../services/usuario.validation";
-import { IUsuario } from "../types/IUsuario.types";
 import { Request } from "express";
 import { Response } from "express";
 
